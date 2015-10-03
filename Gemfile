@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.0'
 
 # Database
 gem 'sqlite3'
+gem 'annotate'
 
 # Shopify
 gem 'shopify_app'
