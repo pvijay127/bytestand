@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root :to => 'home#index'
   mount ShopifyApp::Engine, at: '/'
+  resource :amazon_account, only: [:new, :create, :edit, :update]
 end
 
 # == Route Map

@@ -1,0 +1,11 @@
+<% if notice or alert or content_for?(:messages) %>
+  <div class="messages">
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end%>
+    <%= content_for :messages %>
+  </div>
+<% end %>

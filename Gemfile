@@ -28,6 +28,7 @@ gem 'figaro'
 
 # Amazon Market Web Services API
 gem 'vacuum'
+gem 'peddler'
 
 # Utils
 gem 'rest-client'
