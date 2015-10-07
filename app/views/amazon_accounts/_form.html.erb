@@ -11,16 +11,16 @@
     <% end %>
   <% end %>
   <div class="form-group">
-    <%= f.label :seller_id %>
-    <%= f.text_field :seller_id, class: 'form-control' %>
+    <%= f.label :merchant_id %>
+    <%= f.text_field :merchant_id, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :marketplace_id %>
     <%= f.text_field :marketplace_id, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :mws_auth_token %>
-    <%= f.text_field :mws_auth_token, class: 'form-control' %>
+    <%= f.label :auth_token %>
+    <%= f.text_field :auth_token, class: 'form-control' %>
   </div>
   <%= f.submit 'Save', class: 'btn btn-success' %>
 <% end %>
