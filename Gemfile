@@ -30,6 +30,11 @@ gem 'figaro'
 gem 'vacuum'
 gem 'peddler'
 
+# Background job runner
+gem 'sidekiq'
+gem 'redis'
+gem 'sinatra', require: false
+
 # Utils
 gem 'rest-client'
 

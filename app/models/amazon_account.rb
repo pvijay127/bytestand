@@ -1,4 +1,5 @@
 class AmazonAccount < ActiveRecord::Base
+  has_many :products
   belongs_to :shop
   validates :seller_id, :marketplace_id, :mws_auth_token, presence: true
 end
