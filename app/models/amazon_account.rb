@@ -1,19 +1,27 @@
 class AmazonAccount < ActiveRecord::Base
   has_many :products
   belongs_to :shop
-  validates :seller_id, :marketplace_id, :mws_auth_token, presence: true
+  validates :merchant_id, :marketplace_id, :auth_token, presence: true
+
+  def api_keys
+    {
+      merchant_id: merchant_id,
+      marketplace_id: marketplace_id,
+      auth_token: auth_token
+    }
+  end
 end
 
 # == Schema Information
-# Schema version: 20151003182328
+# Schema version: 20151008161652
 #
 # Table name: amazon_accounts
 #
+#  auth_token     :string
 #  created_at     :datetime         not null
 #  id             :integer          not null, primary key
 #  marketplace_id :string
-#  mws_auth_token :string
-#  seller_id      :string
+#  merchant_id    :string
 #  shop_id        :integer          indexed
 #  updated_at     :datetime         not null
 #

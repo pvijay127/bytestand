@@ -7,6 +7,7 @@ class GetProductsDetailsJob < ActiveJob::Base
     products_details = MWS::ProductCall.get_products_details(asins)
     products_details.each do |product_details|
       product = Product.find_or_initialize_by(asin: product_details[:asin])
+      product_details.merge!(ProductScraper.new(product_details[:asin], logger: logger).scrape)
       product.attributes = product_details
       product.save
     end
@@ -14,7 +15,7 @@ class GetProductsDetailsJob < ActiveJob::Base
     # the get_matching_product_for_id request has a quota of 20
     # and a restore rate of 5 products per second
     sleep 1
-  rescue Excon::Errors::Error
+  rescue Excon::Errors::Error => e
     log_error e, asins
     sleep 10
     retry

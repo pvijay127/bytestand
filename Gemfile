@@ -30,6 +30,9 @@ gem 'figaro'
 gem 'vacuum'
 gem 'peddler'
 
+# Scraping
+gem 'mechanize'
+
 # Background job runner
 gem 'sidekiq'
 gem 'redis'

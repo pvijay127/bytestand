@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 20151008161652) do
 
   create_table "amazon_accounts", force: :cascade do |t|
     t.integer  "shop_id"
-    t.string   "seller_id"
+    t.string   "merchant_id"
     t.string   "marketplace_id"
-    t.string   "mws_auth_token"
+    t.string   "auth_token"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -29,11 +29,13 @@ ActiveRecord::Schema.define(version: 20151008161652) do
     t.string   "title"
     t.string   "vendor"
     t.text     "description"
+    t.text     "features"
     t.string   "seller_sku"
     t.string   "price"
     t.integer  "quantity"
     t.string   "product_type"
     t.string   "color"
+    t.text     "image"
     t.string   "package_height"
     t.string   "package_width"
     t.string   "package_length"

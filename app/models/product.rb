@@ -13,7 +13,9 @@ end
 #  compare_at_price  :string
 #  created_at        :datetime         not null
 #  description       :text
+#  features          :text
 #  id                :integer          not null, primary key
+#  image             :text
 #  package_height    :string
 #  package_length    :string
 #  package_width     :string

@@ -1,0 +1,18 @@
+# Sample configuration file for Sidekiq.
+# Options here can still be overridden by cmd line args.
+#   sidekiq -C config.yml
+---
+:pidfile: ./tmp/pids/sidekiq.pid
+production: 
+  :concurrency: 25
+  :daemon: true
+  :verbose: false
+  :logfile: ./log/sidekiq.log
+  :timeout: 120
+  :timeout: 30
+development:
+  :concurrency: 25
+  :verbose: true
+  :queues: 
+    - products
+    - reports
