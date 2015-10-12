@@ -42,6 +42,7 @@ class GetAmazonProductsJob < ActiveJob::Base
       products_details.each_with_index do |product_details, idx|
         product = Product.find_or_initialize_by(asin: product_details[:asin],
                                                 amazon_account_id: amazon_account_id)
+        product_details.delete_if{ |k,v| v.blank? }
         product.attributes = product_details
         product.save
       end

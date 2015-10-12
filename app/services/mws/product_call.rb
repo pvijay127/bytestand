@@ -24,14 +24,15 @@ module MWS
 
       def get_products_details(asins)
         asins = Array(asins)
-        @products_details = client.get_matching_product_for_id('ASIN', *asins).parse
+        @products_details = Array(client.get_matching_product_for_id('ASIN', *asins).parse)
         @products_details.map do |item|
           begin
             details = item['Products']['Product']
             details.merge!(asin: item['Id'])
             normalize_product_details(details)
           rescue => e
-            byebug
+            logger.fatal e.message
+            logger.fatal e.backtrace.join("\n")
           end
         end
       end
@@ -43,9 +44,6 @@ module MWS
         product[:vendor] = item_attrs['Brand']
         product[:product_type] = item_attrs['ProductGroup']
         product[:color] = item_attrs['Color']
-        # Those will be downloaded by the scraper
-        # product.bullets = item_attrs[:bullets]
-        # product.image = item_attrs[:image]
         if item_attrs['PackageDimensions']
           pdim = normalize_package_dimensions(item_attrs['PackageDimensions'])
           product[:package_height] = pdim[:height]

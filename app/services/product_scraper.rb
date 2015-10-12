@@ -37,20 +37,20 @@ class ProductScraper
     "http://www.amazon.com/gp/product/#{asin}"
   end
 
-  # def extract_product_description
-  #   description = page.at('#productDescription')
-  #   description ||= page.search('script').map do |s|
-  #     /iframeContent = "(?<desc>.*)";/ =~ s.content 
-  #     desc
-  #   end.compact.first
-  #
-  #   if description
-  #     @product_description = description.text.gsub(/\n[[:blank:]]+/, "\n").gsub(/\n+/, "\n").strip
-  #   else
-  #     @product_description = "We got an empty description"
-  #   end
-  #   @product_description
-  # end
+  def extract_product_description
+    description = page.at('#productDescription')
+    description ||= page.search('script').map do |s|
+      /iframeContent = "(?<desc>.*)";/ =~ s.content 
+      desc
+    end.compact.first
+
+    if description
+      @product_description = description.text.gsub(/\n[[:blank:]]+/, "\n").gsub(/\n+/, "\n").strip
+    else
+      @product_description = "We got an empty description"
+    end
+    @product_description
+  end
 
   def extract_product_features
     features_bullets = page.at("#feature-bullets ul, #feature-bullets-btf .content ul")
@@ -94,7 +94,7 @@ class ProductScraper
   end
 
   def scrape
-    # extract_product_description
+    extract_product_description
     extract_product_features
     extract_product_pictures
     product_info
@@ -103,7 +103,7 @@ class ProductScraper
   def product_info
     @info ||= {
       asin: asin,
-      # description: product_description,
+      description: product_description,
       features: product_features,
       image: best_picture
     }

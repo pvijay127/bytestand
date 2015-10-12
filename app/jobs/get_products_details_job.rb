@@ -8,6 +8,7 @@ class GetProductsDetailsJob < ActiveJob::Base
     products_details.each do |product_details|
       product = Product.find_or_initialize_by(asin: product_details[:asin])
       product_details.merge!(ProductScraper.new(product_details[:asin], logger: logger).scrape)
+      product_details.delete_if{ |k,v| v.blank? }
       product.attributes = product_details
       product.save
     end
