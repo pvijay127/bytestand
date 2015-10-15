@@ -1,5 +1,6 @@
 class Shop < ActiveRecord::Base
   has_one :amazon_account, dependent: :destroy
+  has_many :amazon_products, through: :amazon_account
 
   validates :domain, uniqueness: true
   class << self

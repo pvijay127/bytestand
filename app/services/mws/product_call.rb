@@ -6,11 +6,12 @@ module MWS
   class ProductCall < ApiCall
 
     class << self
-      attr_reader :config
+      attr_accessor :config, :logger
 
       def setup
         @config ||= OpenStruct.new
         yield @config if block_given?
+        @logger = config.logger || Logger.new(STDOUT)
         @config
       end
 
@@ -53,6 +54,10 @@ module MWS
         end
         product[:size] = item_attrs['Size']
         product[:compare_at_price] = item_attrs["ListPrice"].try(:[], "Amount")
+        # Here it will get the parent asin, but until here the
+        # parent_id is not set yet. So it has to be set later
+        product['parent_asin'] = extract_variant_parent_asin(details['Relationships'])
+
         product
       end
 
@@ -64,6 +69,11 @@ module MWS
           end
         end
         pdim
+      end
+
+      def extract_variant_parent_asin(relationships)
+        return unless (relationships && relationships['VariationParent'])
+        relationships['VariationParent']['Identifiers']['MarketplaceASIN']['ASIN']
       end
     end
 

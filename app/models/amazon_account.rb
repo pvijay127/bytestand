@@ -1,10 +1,10 @@
 class AmazonAccount < ActiveRecord::Base
-  has_many :products
+  has_many :amazon_products, class_name: 'Product', dependent: :destroy
   belongs_to :shop
   validates :merchant_id, :marketplace_id, :auth_token, presence: true
 
   def api_keys
-    {
+    @api_keys ||= {
       merchant_id: merchant_id,
       marketplace_id: marketplace_id,
       auth_token: auth_token

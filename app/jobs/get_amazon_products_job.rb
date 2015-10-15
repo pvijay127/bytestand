@@ -36,9 +36,15 @@ class GetAmazonProductsJob < ActiveJob::Base
     # once the report is ready, extract the products asins list
     # and schedule jobs to get products details
     report_ready_callback = proc do |rep|
+      # Filter out the products asins that have been updated
+      # in the last hour
+      asins_to_reject = Product.where(updated_at: [1.hour.ago..DateTime.now],
+                                      amazon_account_id: amazon_account_id).pluck(:asin)
+
       logger.info "Report ready. Status(#{rep.status})."
       # this will get the first list of product details
       products_details = rep.get_products_details
+      products_details.delete_if{ |pd| asins_to_reject.include?(pd[:asin]) }
       products_details.each_with_index do |product_details, idx|
         product = Product.find_or_initialize_by(asin: product_details[:asin],
                                                 amazon_account_id: amazon_account_id)
@@ -47,19 +53,21 @@ class GetAmazonProductsJob < ActiveJob::Base
         product.save
       end
 
-      # Filter out the products asins that have been updated
-      # in the last hour
-      asins_to_reject = Product.where(updated_at: [1.hour.ago..DateTime.now],
-                                      amazon_account_id: amazon_account_id).pluck(:asin)
       asins = products_details.map!{ |pd| pd[:asin] } - asins_to_reject
       if asins.blank?
         logger.info("task skipped.")
         logger.info("products of amazon_account #{amazon_account_id} are up to date.")
       else
-        asins.each_slice(5).with_index do |asins, idx|
+        asins.each_slice(5).with_index do |asins_slice, idx|
           wait_period = idx * 5
-          GetProductsDetailsJob.set(wait: wait_period.seconds).perform_later(api_keys: amazon_account.api_keys,
-                                                                             asins: asins)
+          # add a flag with th index of the slice and the amazon_account_id 
+          # this should be deleted by the job after it complete successfully
+          # this will allow the job runner to check if all asins have been 
+          # performed and then perform the product variant check. and the set
+          # the variants of the product
+          Tracker.start_tracking_jobs(amazon_account.api_keys[:merchant_id])
+          GetProductsDetailsJob.set(wait: wait_period.seconds)
+            .perform_later(api_keys: amazon_account.api_keys, asins: asins_slice)
         end
       end
     end
