@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
     "http://www.amazon.com/gp/product/#{asin}"
   end
 
-  def self.set_products_variants
+  def self.set_products_parents
     where.not(parent_asin: nil).pluck(:parent_asin).each do |pasin|
       pid = where("products.asin = :pasin OR products.parent_asin = :pasin", pasin: pasin)
         .pluck(:id).first
