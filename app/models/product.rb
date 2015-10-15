@@ -1,9 +1,23 @@
 class Product < ActiveRecord::Base
   belongs_to :amazon_account
+  belongs_to :parent, class_name: 'Product'
+  has_many :variants, class_name: 'Product', foreign_key: :parent_id
+
+  def amazon_url
+    "http://www.amazon.com/gp/product/#{asin}"
+  end
+
+  def self.set_products_variants
+    where.not(parent_asin: nil).pluck(:parent_asin).each do |pasin|
+      pid = where("products.asin = :pasin OR products.parent_asin = :pasin", pasin: pasin)
+        .pluck(:id).first
+      where.not(id: pid).where(parent_asin: pasin).update_all(parent_id: pid)
+    end
+  end
 end
 
 # == Schema Information
-# Schema version: 20151008161652
+# Schema version: 20151012191058
 #
 # Table name: products
 #
@@ -19,6 +33,8 @@ end
 #  package_height    :string
 #  package_length    :string
 #  package_width     :string
+#  parent_asin       :string
+#  parent_id         :integer
 #  price             :string
 #  product_type      :string
 #  quantity          :integer
