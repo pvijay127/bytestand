@@ -10,6 +10,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 
 # Database
 gem 'sqlite3'
@@ -18,6 +20,7 @@ gem 'annotate'
 # Shopify
 gem 'shopify_app'
 gem 'shopify_api'
+gem 'shopify_cli'
 
 # Application Server
 gem 'puma'

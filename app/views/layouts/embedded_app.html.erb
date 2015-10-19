@@ -44,8 +44,12 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <div class="container" style='margin-top:50px;'>
-    <%= render 'layouts/errors' %>
+  <div class="container main" style='margin-top:50px;'>
+    <div class="messages">
+      <% if notice or alert or content_for?(:messages) %>
+        <%= render "shared/errors" %>
+      <% end %>
+    </div>
     <%= yield %>
   </div>
 </body>

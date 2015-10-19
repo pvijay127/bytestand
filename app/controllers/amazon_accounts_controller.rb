@@ -1,6 +1,5 @@
 class AmazonAccountsController < AuthenticatedController
   skip_before_action :amazon_account_set?
-  after_action :get_merchant_products_list, only: [:create, :update]
 
   def new
 
@@ -10,6 +9,7 @@ class AmazonAccountsController < AuthenticatedController
     if amazon_account.save
       redirect_to session[:previous_path]
       session.delete(:previous_path)
+      GetAmazonProductsJob.perform_later(amazon_account_id: amazon_account.id)
     else
       flash.alert = "The following errors prevent account saving, please correct them and try again."
       render :new
@@ -41,11 +41,5 @@ class AmazonAccountsController < AuthenticatedController
 
   def amazon_account_params
     params.require(:amazon_account).permit(:merchant_id, :marketplace_id, :auth_token)
-  end
-
-  def get_merchant_products_list
-    if amazon_account.valid?
-      GetAmazonProductsJob.perform_later(amazon_account_params)
-    end
   end
 end

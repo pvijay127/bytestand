@@ -1,0 +1,19 @@
+<tr class='<%= row_class(product) %>' data-parent-id='<%= product.parent_id %>'>
+  <td>
+    <% if product.is_parent? %>
+      <%= check_box_tag 'product_ids[]', product.id %>
+    <% end %>
+  </td>
+  <td class='title'>
+    <% if product.is_parent? %>
+      <%= image_tag 'parent-plus.png', width: '20px', class: 'parent-icon', data: {'parent-id': product.id }  %>
+    <% elsif product.is_variant? %>
+      <%= image_tag 'child1.jpg', width: '15px', class: 'child-icon' %>
+    <% end %>
+    <a href='<%= product.amazon_url %>' target="_blank"> <%= product.title %> </a>
+  </td>
+  <td><%= product.asin %></td>
+  <td><%= product.price %></td>
+  <td><%= product.seller_sku %></td>
+  <td><%= product.variants.count %></td>
+</tr>

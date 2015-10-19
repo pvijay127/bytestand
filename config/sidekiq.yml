@@ -4,14 +4,14 @@
 ---
 :pidfile: ./tmp/pids/sidekiq.pid
 production: 
-  :concurrency: 25
+  :concurrency: 10
   :daemon: true
   :verbose: false
   :logfile: ./log/sidekiq.log
   :timeout: 120
   :timeout: 30
 development:
-  :concurrency: 25
+  :concurrency: 10
   :verbose: true
   :queues: 
     - products
