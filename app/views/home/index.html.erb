@@ -1,53 +1,68 @@
 <script type="text/javascript">
-ShopifyApp.ready(function(){
+  ShopifyApp.ready(function(){
     ShopifyApp.Bar.initialize({
-title: "Home",
-icon: "<%= asset_path('faveicon.png') %>"
-});
+      title: "Home",
+      icon: "<%= asset_path('faveicon.png') %>"
     });
+  });
 </script>
 <h3>Products</h3>
-<%= form_tag push_amazon_products_path, method: 'POST', remote: true do %>
-  <div class='buttons'>
+<div class="row">
+  <div class='col-md-4'>
+    <div class='buttons'>
     <%= link_to pull_amazon_products_path,
-      class: 'btn btn-success pull-products-btn',
+      class: 'btn btn-success btn-sm pull-products-btn',
+      title: 'Pull products list form your amazon seller account.',
       disabled: pulling_amazon_products?,
       remote: true,
       method: :put do %>
-      <% if pulling_amazon_products? %>
-        Pulling Amazon products
-      <% else %>
-        Pull Amazon products
-      <% end %>
-    <% end %>
-    <%= submit_tag 'Push Selected', title: 'Push selected products to shopify', class: 'btn btn-primary' %>
-    <%= link_to 'Push All', push_amazon_products_path(all: true), title: 'Push all products to shopify', class: 'btn btn-primary', remote: true, method: :post %>
-  </div>
-  <div class='pagination-wrapper'>
-    <%= paginate products, theme: 'twitter-bootstrap-3' %>
-  </div>
-  <table class='table table-hover products'>
-    <thead>
-      <th>
-        <%= check_box_tag 'push_all', true, false %>
-        <label for='push_all'></label>
-      </th>
-      <th>Title</th>
-      <th>Asin</th>
-      <th>Price</th>
-      <th>Seller SKU</th>
-      <th># variants</th>
-    </thead>
-    <tbody>
-      <% products.each do |product| %>
-        <%= render partial: "product_row", locals: { product: product } %>
-        <% product.variants.each do |variant| %>
-          <%= render partial: "product_row", locals: { product: variant } %>
+        <% if pulling_amazon_products? %>
+          Pulling products
+        <% else %>
+          Pull products
         <% end %>
       <% end %>
-    </tbody>
-  </table>
-  <div class='pagination-wrapper'>
-    <%= paginate products, theme: 'twitter-bootstrap-3' %>
+      <button type='button' id='push-selected' class='btn btn-primary btn-sm' title='Push selected products to shopify'>Push Selected</button>
+      <%= link_to 'Push All', push_amazon_products_path(all: true), title: 'Push all products to shopify', class: 'btn btn-primary btn-sm', remote: true, method: :post %>
+    </div>
   </div>
-<% end %>
+  <div class="col-md-5 pagination-col" >
+    <%= paginate products, theme: 'twitter-bootstrap-3', window: 0, pagination_class: 'pagination-sm' %>
+  </div>
+  <div class="col-md-3">
+    <%= form_tag search_amazon_products_path, class: 'form-inline', method: :get, remote: true do %>
+      <div class='form-group'>
+        <%= text_field_tag :query, params[:query], class: 'form-control input-sm', placeholder: 'Search by Title, Sku ...' %>
+      </div>
+      <%= submit_tag 'Go', class: 'btn btn-success btn-sm'%>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag push_amazon_products_path, method: 'POST', remote: true, id: 'products_form' do %>
+      <table class='table table-hover products'>
+        <thead>
+          <th>
+            <%= check_box_tag 'push_all', true, false %>
+            <label for='push_all'></label>
+          </th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Seller SKU</th>
+          <th># variants</th>
+        </thead>
+        <tbody>
+          <%= render products %>
+        </tbody>
+      </table>
+      <div class='pagination-wrapper'>
+        <div class="row">
+          <div class="col-md-12 pagination-col">
+            <%= paginate products, theme: 'twitter-bootstrap-3', window: 0, pagination_class: 'pagination-sm' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

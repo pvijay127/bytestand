@@ -4,6 +4,9 @@ class Product < ActiveRecord::Base
   has_many :variants, class_name: 'Product', foreign_key: :parent_id
   scope :a_parent, -> { where(is_parent: true) }
   scope :a_variant, -> { where.not(parent_id: nil) }
+  def self.with_query(sql_query, query_term)
+    where(sql_query, query: query_term)
+  end
 
   def amazon_url
     "http://www.amazon.com/gp/product/#{asin}"
@@ -15,6 +18,14 @@ class Product < ActiveRecord::Base
 
   def is_variant?
     parent_id.present?
+  end
+
+  def product_parent
+    if is_parent? || parent_id.blank?
+      self 
+    else
+      parent
+    end
   end
 
   def shopify_attrs

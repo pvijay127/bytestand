@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   mount ShopifyApp::Engine, at: '/'
   resource :amazon_account, only: [:new, :create, :edit, :update]
   resources :amazon_products, only: nil do
-    put :pull, on: :collection
-    post :push, on: :collection
+    collection do
+      put :pull
+      post :push
+      get :search
+    end
   end
   mount Sidekiq::Web => '/sidekiq'
 end

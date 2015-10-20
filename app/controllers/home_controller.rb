@@ -2,17 +2,15 @@ class HomeController < AuthenticatedController
   def index
   end
 
-  helper_method :products
+  helper_method :products, :product_search
   private
   def products
-    @products ||= paginated
+    return @products if @products
+    product_search.search(scope: current_shop.amazon_products)
+    @products = product_search.results(page: params[:page])
   end
 
-  def paginated
-    shop_products.page(params[:page] || 1)
-  end
-
-  def shop_products
-    current_shop.amazon_products.a_parent
+  def product_search
+    @product_search ||= ProductSearch.new(query: '')
   end
 end

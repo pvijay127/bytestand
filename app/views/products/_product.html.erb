@@ -1,0 +1,6 @@
+<% unless product_search.excluded_product?(product) %>
+  <%= render partial: "products/product_row", locals: { product: product.product_parent } %>
+  <% product_search.product_variants(product).each do |variant| %>
+    <%= render partial: "products/product_row", locals: { product: variant } %>
+  <% end %>
+<% end %>

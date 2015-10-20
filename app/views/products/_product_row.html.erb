@@ -6,13 +6,12 @@
   </td>
   <td class='title'>
     <% if product.is_parent? %>
-      <%= image_tag 'parent-plus.png', width: '20px', class: 'parent-icon', data: {'parent-id': product.id }  %>
+      <span class="glyphicon glyphicon-plus-sign parent-icon" data-parent-id=<%= product.id %> ></span>
     <% elsif product.is_variant? %>
-      <%= image_tag 'child1.jpg', width: '15px', class: 'child-icon' %>
+      <span class="glyphicon glyphicon-triangle-right child-icon" ></span>
     <% end %>
     <a href='<%= product.amazon_url %>' target="_blank"> <%= product.title %> </a>
   </td>
-  <td><%= product.asin %></td>
   <td><%= product.price %></td>
   <td><%= product.seller_sku %></td>
   <td><%= product.variants.count %></td>

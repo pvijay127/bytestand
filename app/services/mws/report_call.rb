@@ -53,9 +53,6 @@ module MWS
     end
 
     def normalize_product_details(product_details)
-      if !product_details['quantity'].to_i.zero?
-        byebug
-      end
       {
         asin: product_details['asin1'],
         title: product_details['item-name'],

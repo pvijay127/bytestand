@@ -1,0 +1,19 @@
+<% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
+$ ->
+  $(document).on('click', '.parent-icon', (e) ->
+    parent_id = $(e.target).data('parentId')
+    $(".variant[data-parent-id='#{parent_id}']").toggle()
+  )
+
+  $(document).on('click', '#push_all', (e) ->
+    checked = $(e.target).prop('checked')
+    all_check_boxes = $("td:first-child input[type='checkbox']")
+    all_check_boxes.prop('checked', checked)
+  )
+
+  $('form').on('click', '#search', (e) ->
+    $('form')
+      .attr('action', '<%= search_amazon_products_path %>')
+      .attr('method', 'GET')
+      .submit()
+  )

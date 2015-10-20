@@ -11,18 +11,6 @@ class AmazonProductsController < AuthenticatedController
   end
 
   def push
-    # Select all products that are not available on shopify yet
-    # push them to shopify 
-    # If a product has variants just show a modal with the selected products
-    # and their variants as a tree
-    #    - product x
-    #      - variant 1
-    #      - variant 2
-    #      - variant 3
-    #    - product y
-    #      - variant 1
-    #      - variant 2
-    byebug
     if params[:all]
       push_all
     else
@@ -33,10 +21,26 @@ class AmazonProductsController < AuthenticatedController
     end
   end
 
-  helper_method :notice, :pulling_amazon_products?
+  def search
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  helper_method :notice, :pulling_amazon_products?, :products, :product_search
   private
   def notice
     @notice
+  end
+
+  def products
+    return @products if @products
+    product_search.search
+    @products = product_search.results(page: params[:page])
+  end
+
+  def product_search
+    @product_search ||=  ProductSearch.new(query: params[:query])
   end
 
   def activate_shopify_session
