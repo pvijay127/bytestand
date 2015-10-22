@@ -135,7 +135,7 @@ end
 #  features          :text
 #  id                :integer          not null, primary key
 #  image             :text
-#  is_parent         :boolean          default(FALSE)
+#  is_parent         :boolean
 #  package_height    :string
 #  package_length    :string
 #  package_width     :string

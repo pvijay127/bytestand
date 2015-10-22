@@ -20,7 +20,7 @@ class Shop < ActiveRecord::Base
 end
 
 # == Schema Information
-# Schema version: 20151003161307
+# Schema version: 20151021202030
 #
 # Table name: shops
 #
@@ -29,6 +29,7 @@ end
 #  id         :integer          not null, primary key
 #  token      :text
 #  updated_at :datetime         not null
+#  webhook_id :string
 #
 # Indexes
 #

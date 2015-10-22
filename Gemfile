@@ -44,13 +44,11 @@ gem 'sinatra', require: false
 # Utils
 gem 'rest-client'
 
-group :development, :test do
+group :development do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-end
-
-group :development do
   gem 'pry-rails'
   gem 'better_errors'
+  gem "binding_of_caller"
 end

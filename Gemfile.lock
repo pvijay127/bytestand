@@ -290,6 +290,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   better_errors
+  binding_of_caller
   bootstrap-kaminari-views
   bootstrap-sass (~> 3.3.5)
   byebug

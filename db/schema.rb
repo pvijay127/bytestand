@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016103831) do
+ActiveRecord::Schema.define(version: 20151021202030) do
 
   create_table "amazon_accounts", force: :cascade do |t|
     t.integer  "shop_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151016103831) do
   add_index "amazon_accounts", ["shop_id"], name: "index_amazon_accounts_on_shop_id"
 
   create_table "products", force: :cascade do |t|
-    t.string   "asin",                              null: false
+    t.string   "asin",              null: false
     t.string   "title"
     t.string   "vendor"
     t.text     "description"
@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 20151016103831) do
     t.string   "size"
     t.string   "compare_at_price"
     t.integer  "amazon_account_id"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "parent_asin"
     t.integer  "parent_id"
-    t.boolean  "is_parent",         default: false
+    t.boolean  "is_parent"
     t.string   "shopify_id"
   end
 
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20151016103831) do
     t.text     "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "webhook_id"
   end
 
   add_index "shops", ["domain"], name: "index_shops_on_domain"
