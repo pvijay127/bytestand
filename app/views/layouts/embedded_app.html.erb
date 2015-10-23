@@ -28,23 +28,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">ByteStand</a>
+        <a class="navbar-brand" href= "<%= root_path %>">
+          <img alt="ByteStand" src="http://s2.postimg.org/74hul1t7t/navbar_brand.png">
+        </a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li>
-            <%= link_to 'Products', root_path %>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "Amazon Account", edit_amazon_account_path %></li>
-            </ul>
-          </li>
+          <li class="passive"><%= link_to 'products', root_path %><span class="sr-only">(current)</span></a></li>
+          <li class="passive"><%= link_to "profile", edit_amazon_account_path %><span class="sr-only">(current)</span></a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

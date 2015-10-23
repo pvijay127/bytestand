@@ -10,18 +10,47 @@
       </div>
     <% end %>
   <% end %>
-  <div class="form-group">
-    <%= f.label :merchant_id %>
-    <%= f.text_field :merchant_id, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :marketplace_id %>
-    <%= f.text_field :marketplace_id, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= f.label :auth_token %>
-    <%= f.text_field :auth_token, class: 'form-control' %>
-  </div>
-  <%= f.submit 'Save', class: 'btn btn-success' %>
+
+      
+      <div class="col-md-12 well">  <!-- This is the first well, and says take up all the 8 rows we have-->
+        <form class="form-horizontal"> <!-- needs to wrap around all the form-groups -->
+      
+          <div class="form-group">
+            <h4>Seller Id</h4> 
+              <div class="input-group input-group-lg">
+                <div class="input-group-addon border">    
+                  <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+                </div>
+                  <%= f.text_field :merchant_id, class: 'form-control input-lg', placeholder: "Seller Id"  %>
+              </div>
+          </div> <!-- This should be good -->
+          
+          <div class="form-group">
+            <h4>Marketplace Id</h4>
+              <div class="input-group input-group-lg">
+                <div class="input-group-addon border">    
+                  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+                </div>
+                  <%= f.text_field :marketplace_id, :class => "form-control input-lg", :placeholder => "Marketplace Id" %>
+              </div>
+          </div>
+          
+          <div class="form-group">
+            <h4>MWS Auth Token</h4>
+              <div class="input-group input-group-lg">
+                <div class="input-group-addon border">    
+                  <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                </div>
+                  <%= f.text_field :auth_token, :class => "form-control input-lg", :placeholder => "MWS Auth Token" %>
+              </div>
+          </div>
+          
+      <%= f.submit 'Save Profile', class: 'btn btn-primary btn-lg btn-block' %>
+        
+        </form> <!--end of the form -->
+      </div> <!--this is the well and takes up the 8 columns -->
+
+    
+  
 <% end %>
 

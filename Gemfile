@@ -45,10 +45,10 @@ gem 'sinatra', require: false
 gem 'rest-client'
 
 group :development do
+  gem 'better_errors'
+  gem "binding_of_caller"
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry-rails'
-  gem 'better_errors'
-  gem "binding_of_caller"
 end

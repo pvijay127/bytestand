@@ -4,7 +4,7 @@
       <%= check_box_tag 'product_ids[]', product.id %>
     <% end %>
   </td>
-  <td class='title'>
+  <td class='title body'>
     <% if product.is_parent? %>
       <span class="glyphicon glyphicon-plus-sign parent-icon" data-parent-id=<%= product.id %> ></span>
     <% elsif product.is_variant? %>
@@ -12,7 +12,7 @@
     <% end %>
     <a href='<%= product.amazon_url %>' target="_blank"> <%= product.title %> </a>
   </td>
-  <td><%= product.price %></td>
+  <td><%= number_to_currency(product.price) %></td>
   <td><%= product.seller_sku %></td>
   <td><%= product.variants.count %></td>
 </tr>

@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@font-face {
+    font-family: 'Lato', sans-serif;
+    src: url(http://fonts.googleapis.com/css?family=Lato:900);
+}
+
+
 .child-icon {
   opacity: 0.5;
 }
@@ -42,4 +48,52 @@ input[type=checkbox]:checked {
   width: 15px;
   height: 15px;
   opacity: 1;
+}
+
+.well {
+    background-color: #f0fee1 !important;
+}
+
+.btn-primary {
+    background-color: #3a3a3a     !important;
+    border-color: #3a3a3a     !important;
+    color: #fff     !important;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #f0fee1;
+ }
+ 
+body {
+    color: #3a3a3a !important;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.42857 !important;
+    padding-top: 100px !important;
+}
+
+th {
+background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #fbfcfd 0%, #edeff5 100%) repeat scroll 0 0;
+} 
+
+a:hover, a:focus {
+    color: #008c3e;
+    text-decoration: underline;
+}
+
+a {
+    color: #008c3e;
+    text-decoration: none;
+}
+
+.passive {
+    padding-top: 20px;
+    font-size: 15px;
+}
+
+.well-pad {
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
 }
