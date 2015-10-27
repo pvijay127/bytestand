@@ -4,14 +4,12 @@
       <%= check_box_tag 'product_ids[]', product.id %>
     <% end %>
   </td>
-  <td>
+  <td class='title body'>
     <% if product.is_parent? %>
       <span class="glyphicon glyphicon-plus-sign parent-icon" data-parent-id=<%= product.id %> ></span>
     <% elsif product.is_variant? %>
       <span class="glyphicon glyphicon-triangle-right child-icon" ></span>
     <% end %>
-  </td>
-  <td class='title body'>
     <a href='<%= product.amazon_url %>' target="_blank"> <%= product.title %> </a>
   </td>
   <td><%= number_to_currency(product.price) %></td>
