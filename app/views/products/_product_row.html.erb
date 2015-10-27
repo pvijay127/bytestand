@@ -1,18 +1,23 @@
 <tr class='<%= row_class(product) %>' data-parent-id='<%= product.parent_id %>'>
   <td>
-    <% if product.is_parent? %>
+    <% unless product.is_variant? %>  
       <%= check_box_tag 'product_ids[]', product.id %>
     <% end %>
   </td>
-  <td class='title body'>
+  <td>
     <% if product.is_parent? %>
       <span class="glyphicon glyphicon-plus-sign parent-icon" data-parent-id=<%= product.id %> ></span>
     <% elsif product.is_variant? %>
       <span class="glyphicon glyphicon-triangle-right child-icon" ></span>
     <% end %>
+  </td>
+  <td class='title body'>
     <a href='<%= product.amazon_url %>' target="_blank"> <%= product.title %> </a>
   </td>
   <td><%= number_to_currency(product.price) %></td>
   <td><%= product.seller_sku %></td>
+  <td><%= product.product_type %></td>
+  <td><%= link_to "Edit","", class: "btn btn-primary btn-sm" %></td>
+  <td><%= link_to "Delete","", class: "btn orange btn-sm" %></td>
   <td><%= product.variants.count %></td>
 </tr>
