@@ -6,8 +6,7 @@ class GetAmazonProductsJob < ActiveJob::Base
   # that we get belongs_to
   def perform(amazon_account_id: , report_request_id: nil)
     logger.info "Requesting amazon products list for:\
-    amazon_account_id: #{amazon_account_id}
-    "
+    amazon_account_id: #{amazon_account_id}"
     amazon_account = AmazonAccount.find(amazon_account_id)
     # Send a report request
     report = MWS::ReportCall.new(api_keys: amazon_account.api_keys, request_id: report_request_id)

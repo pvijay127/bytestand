@@ -1,7 +1,24 @@
+<script type='text/javascript'>
+  setTimeout(function(){
+    $('.messages').remove();
+    $('.field_with_errors').each(function(){
+      var $field = $(this);
+      $field.replaceWith($field.html());
+    });
+  }, 5000);
+  
+</script>
+
 <% if notice %>
-  <div class="alert alert-success"><%= notice %></div>
+  <div class="alert alert-success">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <%= notice %>
+  </div>
 <% end %>
 <% if alert %>
-  <div class="alert alert-danger"><%= alert %></div>
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <div><%= alert %></div>
+    <%= content_for :messages %>
+  </div>
 <% end%>
-<%= content_for :messages %>

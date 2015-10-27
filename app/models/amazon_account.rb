@@ -1,7 +1,9 @@
 class AmazonAccount < ActiveRecord::Base
   has_many :amazon_products, class_name: 'Product', dependent: :destroy
   belongs_to :shop
-  validates :merchant_id, :auth_token, presence: true, uniqueness: true
+  # I removed the uniqueness validation because I expect two stores to 
+  # be related to the same amazon account.
+  validates :merchant_id, :auth_token, presence: true #, uniqueness: true
   validates :marketplace_id, presence: true
 
   def api_keys

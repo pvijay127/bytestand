@@ -1,3 +1,13 @@
 // Place all the styles related to the amazon_accounts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.field_with_errors {
+    .input-lg {
+    	height: 46px;
+    	padding: 10px 16px;
+    	font-size: 18px;
+    	line-height: 1.3333333;
+    	border-radius: 6px;
+    	border-color: orangered;
+    }
+}

@@ -1,48 +1,45 @@
-<%= form_for amazon_account, url: amazon_account_path do |f| %>
-  <% if(has_errors?(amazon_account)) %>
-    <% content_for :messages do %>
-      <div class="errors">
-        <ul>
-          <% error_messages(amazon_account) do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+<% content_for :messages do %>
+  <% if amazon_account.errors.any? %>
+    <ul>
+      <% amazon_account.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   <% end %>
-
+<% end %>
+<%= form_for amazon_account, url: amazon_account_path do |f| %>
       
       <div class="col-md-12 well">  <!-- This is the first well, and says take up all the 8 rows we have-->
         <form class="form-horizontal"> <!-- needs to wrap around all the form-groups -->
       
           <div class="form-group">
             <h4>Seller Id</h4> 
-              <div class="input-group input-group-lg">
-                <div class="input-group-addon border">    
-                  <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
-                </div>
-                  <%= f.text_field :merchant_id, class: 'form-control input-lg', placeholder: "Seller Id"  %>
+            <div class="input-group input-group-lg">
+              <div class="input-group-addon border">    
+                <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
               </div>
+                <%= f.text_field :merchant_id, class: 'form-control input-lg', placeholder: "Seller Id"  %>
+            </div>
           </div> <!-- This should be good -->
           
           <div class="form-group">
             <h4>Marketplace Id</h4>
-              <div class="input-group input-group-lg">
-                <div class="input-group-addon border">    
-                  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-                </div>
-                  <%= f.text_field :marketplace_id, :class => "form-control input-lg", :placeholder => "Marketplace Id" %>
+            <div class="input-group input-group-lg">
+              <div class="input-group-addon border">    
+                <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
               </div>
+                <%= f.text_field :marketplace_id, :class => "form-control input-lg", :placeholder => "Marketplace Id" %>
+            </div>
           </div>
           
           <div class="form-group">
             <h4>MWS Auth Token</h4>
-              <div class="input-group input-group-lg">
-                <div class="input-group-addon border">    
-                  <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                </div>
-                  <%= f.text_field :auth_token, :class => "form-control input-lg", :placeholder => "MWS Auth Token" %>
+            <div class="input-group input-group-lg">
+              <div class="input-group-addon border">    
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
               </div>
+                <%= f.text_field :auth_token, :class => "form-control input-lg", :placeholder => "MWS Auth Token" %>
+            </div>
           </div>
           
       <%= f.submit 'Save Profile', class: 'btn btn-primary btn-lg btn-block' %>

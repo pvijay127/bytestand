@@ -28,6 +28,15 @@
   margin-top: 15px;
 }
 
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    background-color: #3a3a3a;
+    border-color: #3a3a3a;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #3a3a3a;
+}
+
 .pagination-wrapper:nth-of-type(3) {
   margin-bottom: 10px;
 }
@@ -96,4 +105,38 @@ a {
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
+}
+
+.form-control {
+
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #3a3a3a;
+    display: block;
+    font-size: 15px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+  .form-control:focus {
+    border-color: rgba(2, 139, 61, 0.8)  !important;
+    border-color: #028b3d !important;
+    outline: 0  !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(2, 139, 61, 0.6)  !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(2, 139, 61, 0.6)  !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(2, 139, 61, 0.6)  !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(2, 139, 61, 0.6)  !important;
+}
+
+.pad_bottom {
+    padding-bottom: 10px !important;
+}
+
+.orange {
+    background-color: #ffa200;
+    border-color: #ffa200;
+    color: #fff;
 }
