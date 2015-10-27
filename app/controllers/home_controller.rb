@@ -7,7 +7,7 @@ class HomeController < AuthenticatedController
   def products
     return @products if @products
     product_search.search(scope: current_shop.amazon_products)
-    @products = product_search.results(page: params[:page])
+    @products = product_search.results(page: params[:page], per: params[:product_displayed])
   end
 
   def product_search

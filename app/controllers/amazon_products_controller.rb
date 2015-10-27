@@ -22,6 +22,7 @@ class AmazonProductsController < AuthenticatedController
   end
 
   def search
+    puts "333333333"
     respond_to do |format|
       format.js
     end
@@ -36,11 +37,11 @@ class AmazonProductsController < AuthenticatedController
   def products
     return @products if @products
     product_search.search
-    @products = product_search.results(page: params[:page])
+    @products = product_search.results(page: params[:page], per: params[:product_displayed])
   end
 
   def product_search
-    @product_search ||=  ProductSearch.new(query: params[:query])
+    @product_search ||= ProductSearch.new(query: params[:query])
   end
 
   def activate_shopify_session

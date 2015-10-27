@@ -5,14 +5,14 @@ class ProductSearch
     @query = query.downcase
   end
 
-  def results(page: 0)
+  def results(page: 0, per: 50)
     if query.blank?
-      @products.page(page)
+      @products.page(page).per(per.to_i)
     else
       @products.to_a.map! do |product|
-        product.product_parent 
+        product.product_parent
       end.uniq!(&:id)
-      Kaminari.paginate_array(@products).page(page)
+      Kaminari.paginate_array(@products).page(page).per(per.to_i)
     end
   end
 

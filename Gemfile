@@ -16,6 +16,7 @@ gem 'bootstrap-kaminari-views'
 # Database
 gem 'sqlite3'
 gem 'annotate'
+gem 'pg'
 
 # Shopify
 gem 'shopify_app'

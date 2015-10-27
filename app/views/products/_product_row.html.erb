@@ -6,7 +6,7 @@
   </td>
   <td class='title body'>
     <% if product.is_parent? %>
-      <span class="glyphicon glyphicon-plus-sign parent-icon" data-parent-id=<%= product.id %> ></span>
+      <span class="glyphicon glyphicon-minus-sign parent-icon" data-parent-id=<%= product.id %> ></span>
     <% elsif product.is_variant? %>
       <span class="glyphicon glyphicon-triangle-right child-icon" ></span>
     <% end %>

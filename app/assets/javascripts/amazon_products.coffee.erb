@@ -2,6 +2,8 @@
 $ ->
   $(document).on('click', '.parent-icon', (e) ->
     parent_id = $(e.target).data('parentId')
+    $(e.target).toggleClass('glyphicon-minus-sign')
+    $(e.target).toggleClass('glyphicon-plus-sign')
     $(".variant[data-parent-id='#{parent_id}']").toggle()
   )
 
@@ -17,3 +19,6 @@ $ ->
       .attr('method', 'GET')
       .submit()
   )
+
+product_displayed = () ->
+  alert('hello')
